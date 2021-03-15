@@ -2,9 +2,9 @@
 更新时间:2021-02-27 23:30
 百度极速版签到任务，使用脚本有黑号严重，请谨慎使用‼️
 
-赞赏:百度极速邀请码`RW9ZSW 点击链接立得红包，最高100元！https://dwz.cn/Oilv4CJ1`,农妇山泉 -> 有点咸，万分感谢
+赞赏:百度极速邀请码`RW9ZSW 点击链接立得红包，最高100元！https://dwz.cn/Oilv4CJ1`,农妇山泉 -> 有点咸，万分感谢，邀请码已失效
 
-本脚本默认使用chavyleung大佬和Nobyda的贴吧ck，获取方法请看大佬仓库说明，内置自动提现，提现金额默认30元，当当前时间为早上6点且达到提现金额时仅运行提现任务，提现金额小于设置金额时继续运行其他任务。
+本脚本已不再使用其他Cookie，内置自动提现，提现金额默认30元，当当前时间为早上6点且达到提现金额时仅运行提现任务，提现金额小于设置金额时继续运行其他任务。
 
 增加百度任务开关，Actions中Secrets为BAIDU_TASK，值填true或者false
 
@@ -20,7 +20,7 @@ https:\/\/haokan\.baidu\.com\/activity\/h5\/vault\?productid=\d url script-reque
 const $ = new Env('百度极速版')
 let CookieArr = [],cashArr=[];
 const notify = $.isNode() ? require('./sendNotify') : '';
-const baiducks = $.getdata('bdspeed')||$.getdata(`chavy_cookie_tieba`) || $.getdata(`CookieTB`);
+const baiducks = $.getdata('bdspeed')
 let baiducash = $.getdata(`cash_baidu`);
 
 let taskON = $.getdata(`task_baidu`)||"true"//除提现和兑换外其他任务开关;
@@ -43,7 +43,7 @@ if ($.isNode()) {
  else if (process.env.BAIDU_COOKIE && process.env.BAIDU_COOKIE.indexOf('\n') > -1) {
   BDCookie = process.env.BAIDU_COOKIE.split('\n');
   } else {
-  BDCookie = process.env.BAIDU_COOKIE.split()
+  BDCookie = [process.env.BAIDU_COOKIE]
   };
   if (process.env.BAIDU_CASH && process.env.BAIDU_CASH.indexOf('&') > -1) {
   BDCASH = process.env.BAIDU_CASH.split('&');
@@ -74,7 +74,7 @@ if ($.isNode()) {
 !(async() =>{
   if (!CookieArr[0]) {
     console.log($.name, '【提示】请把百度Cookie填入Github 的 Secrets 中，请以&或者换行隔开');
-    return
+    $.done()
   };
     timeZone = new Date().getTimezoneOffset() / 60;
     timestamp = Date.now()+ (8+timeZone) * 60 * 60 * 1000;

@@ -59,7 +59,7 @@ if (typeof $request !== 'undefined') {
 !(async() => {
   if (!BodyArr[0]) {
     console.log($.name, '【提示】请把聚看点Cookie填入Github 的 Secrets 中，请以&或者换行隔开')
-    return;
+    $.done();
   }
   console.log(`您共提供${BodyArr.length}个聚看点账号Cookie\n————————————————————————————————————\n`)
   for (let i = 0; i < BodyArr.length; i++) {
@@ -183,7 +183,7 @@ function signShare() {
      if (sign_share.ret == "ok"){
        $.log("签到分享收益: +"+sign_share.profit)
         await Stimulate("23")
-        await invite()
+        //await invite()
          }  else {
        $.log(sign_share.rtn_msg)
      }
